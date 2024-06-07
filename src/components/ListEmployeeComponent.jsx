@@ -62,27 +62,29 @@ const ListEmployeeComponent = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" width="200px">
             <h2 className="text-center">Employees List</h2>
             <button className="btn btn-primary" onClick={navigateToAddEmployee}>Add Employee</button>
             <div className="table-container" style={{ height: 400, overflow: 'auto' }}>
                 <DataGrid container spacing={2}
                     rows={employees}
                     columns={[
-                        { field: 'id', headerName: 'Employee ID', width: 150 },
-                        { field: 'firstname', headerName: 'Employee First Name', width: 200 },
-                        { field: 'lastname', headerName: 'Employee Last Name', width: 200 },
-                        { field: 'email', headerName: 'Employee Email Id', width: 250 },
+                        { field: 'id', headerName: 'Employee ID', width: 150 ,align:'center',headerAlign: 'center'},
+                        { field: 'firstname', headerName: 'Employee First Name', width: 200,align:'center',headerAlign: 'center' },
+                        { field: 'lastname', headerName: 'Employee Last Name', width: 200 ,align:'center',headerAlign: 'center'},
+                        { field: 'email', headerName: 'Employee Email Id', width: 220 ,align:'center',headerAlign: 'center'},
                         {
                             field: 'actions',
                             headerName: 'Actions',
                             sortable: false,
-                            width: 250,
+                            width: 255,
+                            align:'center',
+                            headerAlign: 'center',
                             renderCell: (params) => (
                                 <div>
-                                    <button className="btn btn-info" onClick={() => navigateToUpdateEmployee(params.row.id)}>Update</button>
+                                    <button className="btn btn-primary" onClick={() => navigateToUpdateEmployee(params.row.id)}>Update</button>
                                     <button style={{ marginLeft: "15px" }} className="btn btn-danger" onClick={() => handleDeleteEmployee(params.row.id)}>Delete</button>
-                                    <button style={{ marginLeft: "15px" }} className="btn btn-info" onClick={() => navigateToViewEmployee(params.row.id)}>View</button>
+                                    <button style={{ marginLeft: "15px" }} className="btn btn-primary" onClick={() => navigateToViewEmployee(params.row.id)}>View</button>
                                 </div>
                             ),
                         },

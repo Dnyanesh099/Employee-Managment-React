@@ -14,7 +14,7 @@ class HeaderComponent extends Component {
             <div className='fixed'>
                 <header>
                     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                    <div className="navbar-brand">Employee Management App</div>
+                    <div className="navbar-brand" style={{ marginLeft: "10px" }}>Employee Management App</div>
                     </nav>
                 </header>
             </div>

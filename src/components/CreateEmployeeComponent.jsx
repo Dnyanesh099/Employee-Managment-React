@@ -59,7 +59,7 @@ const CreateEmployeeComponent = () => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '75vh' }}>
-            <Container maxWidth="md" mt={4}>
+            <Container maxWidth="md" mt={4} >
                 <Grid container justifyContent="center">
                     <Grid item xs={12} md={6} style={{ border: '2px solid #e0e0e0', borderRadius: '4px' }}>
                         <Card>
