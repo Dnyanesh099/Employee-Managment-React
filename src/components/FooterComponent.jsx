@@ -16,7 +16,7 @@ const FooterComponent = () => {
 
   return (
     <footer style={footerStyle}>
-      © 2024 Employee Management System. All rights reserved.
+      © 2024 Employee Management System.
     </footer>
   );
 }
