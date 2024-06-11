@@ -7,7 +7,7 @@ function CreateEmployeeComponent() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [emailId, setEmailId] = useState('');
-    const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
+    const [openSnackbar, setOpenSnackbar] = useState(false); 
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -35,10 +35,10 @@ function CreateEmployeeComponent() {
             setLastName('');
             setEmailId('');
             setOpenSnackbar(true);
-            setTimeout(() => navigate('/'), 500); // Navigate after 3 seconds
+            setTimeout(() => navigate('/'), 500); 
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
-            // Handle error if needed
+            
         }
     };
 
