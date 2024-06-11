@@ -3,7 +3,7 @@ import { Container, Grid, Card, CardContent, Typography, TextField, Button, Snac
 import { useNavigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const CreateEmployeeComponent = () => {
+function CreateEmployeeComponent() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [emailId, setEmailId] = useState('');
@@ -12,7 +12,7 @@ const CreateEmployeeComponent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         try {
             const response = await fetch('http://localhost:8080/employee/create', {
                 method: 'POST',
@@ -34,9 +34,8 @@ const CreateEmployeeComponent = () => {
             setFirstName('');
             setLastName('');
             setEmailId('');
-            setOpenSnackbar(true); // Open Snackbar
-            // navigate('/'); // You may navigate to another page if needed
-          
+            setOpenSnackbar(true);
+            setTimeout(() => navigate('/'), 500); // Navigate after 3 seconds
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             // Handle error if needed

@@ -3,7 +3,7 @@ import { Container, Grid, Card, CardContent, Typography, TextField, Button, Snac
 import { useNavigate, useParams } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const UpdateEmployeeComponent = () => {
+function UpdateEmployeeComponent  () {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -40,7 +40,7 @@ const UpdateEmployeeComponent = () => {
 
             setOpenSnackbar(true);
 
-            setTimeout(() => { navigate('/'); }, 3000);
+            setTimeout(() => { navigate('/'); }, 500);
         } catch (error) {
             console.error('Failed to update employee details:', error);
         }
