@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Grid, Card, CardContent, Typography, TextField, Button } from '@mui/material';
+import { Container, Grid, Card, CardContent, Typography, TextField, Button, Snackbar, SnackbarContent } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const UpdateEmployeeComponent = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [emailId, setEmailId] = useState('');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -34,7 +36,10 @@ const UpdateEmployeeComponent = () => {
                 body: JSON.stringify({ firstname: firstName, lastname: lastName, email: emailId }),
             });
             if (!response.ok) throw new Error('Network response was not ok');
-            navigate('/');
+
+            setOpenSnackbar(true);
+
+            setTimeout(() => { navigate('/'); }, 1000);
         } catch (error) {
             console.error('Failed to update employee details:', error);
         }
@@ -50,43 +55,49 @@ const UpdateEmployeeComponent = () => {
         }
     };
 
+    const handleSnackbarClose = () => {
+        setOpenSnackbar(false);
+    };
+
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '75vh' }}>
             <Container maxWidth="md">
                 <Grid container justifyContent="center">
                     <Grid item xs={12} md={6}>
+                        <Snackbar
+                            open={openSnackbar}
+                            autoHideDuration={3000}
+                            onClose={handleSnackbarClose}
+                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        >
+                            <SnackbarContent
+                                style={{ backgroundColor: 'green' }}
+                                message={
+                                    <span style={{ display: 'flex', alignItems: 'center' }}>
+                                        <CheckCircleIcon style={{ marginRight: '8px' }} />
+                                        Data updated successfully!
+                                    </span>
+                                }
+                            />
+                        </Snackbar>
                         <Card variant="outlined">
                             <CardContent>
                                 <Typography variant="h5" align="center" gutterBottom>Update Employee</Typography>
                                 <form onSubmit={handleSubmit}>
-                                     <Grid container spacing={2}>
+                                    <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                             <TextField fullWidth label="First Name" variant="outlined" value={firstName} onChange={handleChange} name="firstName" />
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <TextField 
-                                            fullWidth 
-                                            label="Last Name" 
-                                            variant="outlined" 
-                                            value={lastName} 
-                                            onChange={handleChange} 
-                                            name="lastName" />
+                                            <TextField fullWidth label="Last Name" variant="outlined" value={lastName} onChange={handleChange} name="lastName" />
                                         </Grid>
-
                                         <Grid item xs={12}>
-                                            <TextField 
-                                            fullWidth label="Email Id" 
-                                            variant="outlined" 
-                                            value={emailId} 
-                                            onChange={handleChange} 
-                                            name="emailId" />
+                                            <TextField fullWidth label="Email Id" variant="outlined" value={emailId} onChange={handleChange} name="emailId" />
                                         </Grid>
-
                                         <Grid item xs={12}>
                                             <Button type="submit" variant="contained" color="primary">Update</Button>
                                         </Grid>
-
-                                     </Grid>
+                                    </Grid>
                                 </form>
                             </CardContent>
                         </Card>
