@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Container, Grid, Card, CardContent, Typography, TextField, Button } from '@mui/material';
+import { Container, Grid, Card, CardContent, Typography, TextField, Button, Snackbar, SnackbarContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const CreateEmployeeComponent = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [emailId, setEmailId] = useState('');
+    const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -29,14 +31,15 @@ const CreateEmployeeComponent = () => {
             }
 
             console.log('Employee created successfully');
-            
             setFirstName('');
             setLastName('');
             setEmailId('');
-            navigate('/');
+            setOpenSnackbar(true); // Open Snackbar
+            // navigate('/'); // You may navigate to another page if needed
           
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
+            // Handle error if needed
         }
     };
 
@@ -57,11 +60,31 @@ const CreateEmployeeComponent = () => {
         }
     };
 
+    const handleSnackbarClose = () => {
+        setOpenSnackbar(false);
+    };
+
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '75vh' }}>
-            <Container maxWidth="md" mt={4} >
+            <Container maxWidth="md" mt={4}>
                 <Grid container justifyContent="center">
                     <Grid item xs={12} md={6} style={{ border: '2px solid #e0e0e0', borderRadius: '4px' }}>
+                        <Snackbar
+                            open={openSnackbar}
+                            autoHideDuration={3000}
+                            onClose={handleSnackbarClose}
+                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        >
+                            <SnackbarContent
+                                style={{ backgroundColor: 'green', color: '#fff' }}
+                                message={
+                                    <span style={{ display: 'flex', alignItems: 'center' }}>
+                                        <CheckCircleIcon style={{ marginRight: '8px' }} />
+                                        Employee created successfully!
+                                    </span>
+                                }
+                            />
+                        </Snackbar>
                         <Card>
                             <CardContent>
                                 <Typography variant="h5" align="center" gutterBottom>Create Employee</Typography>

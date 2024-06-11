@@ -6,7 +6,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const UpdateEmployeeComponent = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [emailId, setEmailId] = useState('');
+    const [email, setEmail] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -19,7 +19,7 @@ const UpdateEmployeeComponent = () => {
                 const data = await response.json();
                 setFirstName(data.firstname);
                 setLastName(data.lastname);
-                setEmailId(data.email);
+                setEmail(data.email);
             } catch (error) {
                 console.error('Failed to fetch employee details:', error);
             }
@@ -33,13 +33,14 @@ const UpdateEmployeeComponent = () => {
             const response = await fetch(`http://localhost:8080/employee/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ firstname: firstName, lastname: lastName, email: emailId }),
+                body: JSON.stringify(
+                    { firstname: firstName, lastname: lastName, email: email }),
             });
             if (!response.ok) throw new Error('Network response was not ok');
 
             setOpenSnackbar(true);
 
-            setTimeout(() => { navigate('/'); }, 1000);
+            setTimeout(() => { navigate('/'); }, 3000);
         } catch (error) {
             console.error('Failed to update employee details:', error);
         }
@@ -50,7 +51,7 @@ const UpdateEmployeeComponent = () => {
         switch (name) {
             case 'firstName': setFirstName(value); break;
             case 'lastName': setLastName(value); break;
-            case 'emailId': setEmailId(value); break;
+            case 'email': setEmail(value); break;
             default: break;
         }
     };
@@ -71,7 +72,7 @@ const UpdateEmployeeComponent = () => {
                             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         >
                             <SnackbarContent
-                                style={{ backgroundColor: 'green' }}
+                                style={{ backgroundColor: 'green', color: '#fff' }}
                                 message={
                                     <span style={{ display: 'flex', alignItems: 'center' }}>
                                         <CheckCircleIcon style={{ marginRight: '8px' }} />
@@ -92,7 +93,7 @@ const UpdateEmployeeComponent = () => {
                                             <TextField fullWidth label="Last Name" variant="outlined" value={lastName} onChange={handleChange} name="lastName" />
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <TextField fullWidth label="Email Id" variant="outlined" value={emailId} onChange={handleChange} name="emailId" />
+                                            <TextField fullWidth label="Email Id" variant="outlined" value={email} onChange={handleChange} name="email" />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Button type="submit" variant="contained" color="primary">Update</Button>
